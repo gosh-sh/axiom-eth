@@ -134,6 +134,11 @@ impl<F: ScalarField> RlcManager<F> {
 
 impl<F: ScalarField> VirtualRegionManager<F> for RlcManager<F> {
     type Config = PureRlcConfig<F>;
+    // gosh-fork halo2-base drops the upstream `type Assignment = ()` default
+    // (it needs the unstable `associated_type_defaults` feature). Name it
+    // explicitly so this builds against the stable gosh fork. See
+    // acki-nacki-bridge docs/zkhalo2verifywithvk_reference.md.
+    type Assignment = ();
 
     fn assign_raw(&self, rlc_config: &Self::Config, region: &mut Region<F>) {
         if self.witness_gen_only {
