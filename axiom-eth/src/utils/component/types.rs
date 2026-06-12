@@ -6,6 +6,7 @@ use itertools::Itertools;
 use serde::{Deserialize, Serialize};
 
 use super::param::{POSEIDON_RATE, POSEIDON_T};
+use super::promise_loader::comp_loader::BasicComponentCommiter;
 use super::{ComponentType, ComponentTypeId, LogicalInputValue, LogicalResult};
 
 pub type PoseidonHasher<F> =
@@ -152,6 +153,7 @@ impl<F: Field> ComponentType<F> for EmptyComponentType<F> {
     type OutputValue = LogicalEmpty<F>;
     type OutputWitness = LogicalEmpty<AssignedValue<F>>;
     type LogicalInput = LogicalEmpty<F>;
+    type Commiter = BasicComponentCommiter<F>;
 
     fn get_type_id() -> ComponentTypeId {
         "axiom-eth:EmptyComponentType".to_string()

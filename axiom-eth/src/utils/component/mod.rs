@@ -118,7 +118,7 @@ pub trait ComponentType<F: Field>: 'static + Sized {
     type OutputValue: FixLenLogical<F>;
     type OutputWitness: FixLenLogical<AssignedValue<F>>;
     type LogicalInput: LogicalInputValue<F>;
-    type Commiter: ComponentCommiter<F> = BasicComponentCommiter<F>;
+    type Commiter: ComponentCommiter<F>;
 
     /// Get ComponentTypeId of this component type.
     fn get_type_id() -> ComponentTypeId;
