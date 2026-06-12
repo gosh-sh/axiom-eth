@@ -61,7 +61,10 @@ impl CoreBuilderParams for CoreBuilderOutputParams {
 }
 /// Input for CoreBuilder.
 /// TODO: specify its output capacity.
-pub trait CoreBuilderInput<F: Field> = Serialize + DeserializeOwned + Clone + 'static;
+// stable-rust equivalent of the former `trait_alias` declaration:
+//   pub trait CoreBuilderInput<F: Field> = Serialize + DeserializeOwned + Clone + 'static;
+pub trait CoreBuilderInput<F: Field>: Serialize + DeserializeOwned + Clone + 'static {}
+impl<F: Field, T: Serialize + DeserializeOwned + Clone + 'static> CoreBuilderInput<F> for T {}
 
 /// Output for CoreBuilder which is determined at phase0.
 pub struct CoreBuilderOutput<F: Field, T: ComponentType<F>> {
