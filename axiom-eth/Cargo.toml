@@ -48,9 +48,9 @@ rand_chacha = "0.3.1"
 
 # aggregation
 # snark-verifier = { version = "=0.1.7", default-features = false }
-snark-verifier = { git = "https://github.com/axiom-crypto/snark-verifier.git", tag = "v0.1.7-git", default-features = false }
+snark-verifier = { git = "https://github.com/gosh-sh/snark-verifier", branch = "main", default-features = false }
 # snark-verifier-sdk = { version = "=0.1.7", default-features = false }
-snark-verifier-sdk = { git = "https://github.com/axiom-crypto/snark-verifier.git", tag = "v0.1.7-git", default-features = false }
+snark-verifier-sdk = { git = "https://github.com/gosh-sh/snark-verifier", branch = "main", default-features = false }
 
 # generating circuit inputs from blockchain
 ethers-providers = { version = "=2.0.14", optional = true, features = ["optimism"] }
