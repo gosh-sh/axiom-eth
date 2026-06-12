@@ -20,8 +20,8 @@ mod comp_circuit_impl;
 pub use comp_circuit_impl::ComponentCircuitImpl;
 
 pub trait ComponentBuilder<F: Field> {
-    type Config: Clone = ();
-    type Params: Clone + Default = ();
+    type Config: Clone;
+    type Params: Clone + Default;
 
     /// Create Self.
     fn new(params: Self::Params) -> Self;

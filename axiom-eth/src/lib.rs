@@ -1,6 +1,3 @@
-#![feature(trait_alias)]
-#![feature(associated_type_defaults)]
-#![feature(associated_type_bounds)]
 #![warn(clippy::useless_conversion)]
 
 use serde::{de::DeserializeOwned, Serialize};
@@ -26,5 +23,10 @@ pub mod utils;
 #[cfg(feature = "providers")]
 pub mod providers;
 
-pub trait RawField = zkevm_hashes::util::eth_types::Field;
-pub trait Field = RawField + Serialize + DeserializeOwned;
+// stable-rust equivalents of the former `trait_alias` declarations:
+//   pub trait RawField = zkevm_hashes::util::eth_types::Field;
+//   pub trait Field    = RawField + Serialize + DeserializeOwned;
+pub trait RawField: zkevm_hashes::util::eth_types::Field {}
+impl<T: zkevm_hashes::util::eth_types::Field> RawField for T {}
+pub trait Field: RawField + Serialize + DeserializeOwned {}
+impl<T: RawField + Serialize + DeserializeOwned> Field for T {}
