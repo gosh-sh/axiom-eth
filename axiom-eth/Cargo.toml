@@ -47,10 +47,18 @@ rand = "0.8"
 rand_chacha = "0.3.1"
 
 # aggregation
+# Pinned to ccdb510 — the last commit on gosh-sh/snark-verifier before
+# PR #71 (1ae41f5) renamed the `Halo2KzgAccumulationScheme` trait alias to
+# `AccumulationSchemeSDK`. axiom-eth/src/utils/snark_verifier.rs (compiled
+# under the `aggregation` feature) still uses the old name, so tracking
+# `branch = "main"` would break any consumer that enables `aggregation`
+# (e.g. bridge-EVM/deposit-prover). ccdb510 is post v0.1.7 (8effca5) and
+# still on halo2-base v0.4.1-git → fully compatible with the halo2-lib
+# patches every downstream Cargo.toml carries.
 # snark-verifier = { version = "=0.1.7", default-features = false }
-snark-verifier = { git = "https://github.com/gosh-sh/snark-verifier", branch = "main", default-features = false }
+snark-verifier = { git = "https://github.com/gosh-sh/snark-verifier", rev = "ccdb510f60c577f2b683e1f77e1faa91a95f8c5c", default-features = false }
 # snark-verifier-sdk = { version = "=0.1.7", default-features = false }
-snark-verifier-sdk = { git = "https://github.com/gosh-sh/snark-verifier", branch = "main", default-features = false }
+snark-verifier-sdk = { git = "https://github.com/gosh-sh/snark-verifier", rev = "ccdb510f60c577f2b683e1f77e1faa91a95f8c5c", default-features = false }
 
 # generating circuit inputs from blockchain
 ethers-providers = { version = "=2.0.14", optional = true, features = ["optimism"] }
