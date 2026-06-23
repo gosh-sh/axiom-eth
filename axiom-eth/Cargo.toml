@@ -47,18 +47,20 @@ rand = "0.8"
 rand_chacha = "0.3.1"
 
 # aggregation
-# Pinned to ccdb510 — the last commit on gosh-sh/snark-verifier before
-# PR #71 (1ae41f5) renamed the `Halo2KzgAccumulationScheme` trait alias to
-# `AccumulationSchemeSDK`. axiom-eth/src/utils/snark_verifier.rs (compiled
-# under the `aggregation` feature) still uses the old name, so tracking
-# `branch = "main"` would break any consumer that enables `aggregation`
-# (e.g. bridge-EVM/deposit-prover). ccdb510 is post v0.1.7 (8effca5) and
-# still on halo2-base v0.4.1-git → fully compatible with the halo2-lib
-# patches every downstream Cargo.toml carries.
+# Pinned to 164bd42e (branch stable-rust-on-ccdb510) — ccdb510 plus the
+# mechanical stable-Rust backport of PR #72: trait aliases
+# (NativeKzgAccumulationScheme / EvmKzgAccumulationScheme /
+# Halo2KzgAccumulationScheme) become regular traits with blanket impls for
+# GWC/SHPLONK, and the `type AggregationCircuit: Circuit<Fr> = AggregationCircuit;`
+# default is dropped. The original `Halo2KzgAccumulationScheme` name is kept
+# (PR #71's rename to `AccumulationSchemeSDK` was NOT taken), so
+# axiom-eth/src/utils/snark_verifier.rs and any consumer that enables the
+# `aggregation` feature (e.g. bridge-EVM/deposit-prover) still compile.
+# Lets the whole graph build on stable Rust 1.85+.
 # snark-verifier = { version = "=0.1.7", default-features = false }
-snark-verifier = { git = "https://github.com/gosh-sh/snark-verifier", rev = "ccdb510f60c577f2b683e1f77e1faa91a95f8c5c", default-features = false }
+snark-verifier = { git = "https://github.com/gosh-sh/snark-verifier", rev = "164bd42e300b382239e63b16532faca539d6b324", default-features = false }
 # snark-verifier-sdk = { version = "=0.1.7", default-features = false }
-snark-verifier-sdk = { git = "https://github.com/gosh-sh/snark-verifier", rev = "ccdb510f60c577f2b683e1f77e1faa91a95f8c5c", default-features = false }
+snark-verifier-sdk = { git = "https://github.com/gosh-sh/snark-verifier", rev = "164bd42e300b382239e63b16532faca539d6b324", default-features = false }
 
 # generating circuit inputs from blockchain
 ethers-providers = { version = "=2.0.14", optional = true, features = ["optimism"] }
