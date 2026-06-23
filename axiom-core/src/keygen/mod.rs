@@ -166,6 +166,7 @@ impl KeygenCircuitIntent<Fr> for CoreIntentLeaf {
 }
 
 impl KeygenAggregationCircuitIntent for CoreIntentIntermediate {
+    type AggregationCircuit = AggregationCircuit;
     fn intent_of_dependencies(&self) -> Vec<AggregationDependencyIntent> {
         vec![(&self.child_intent).into(); 2]
     }

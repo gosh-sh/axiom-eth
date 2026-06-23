@@ -236,6 +236,7 @@ pub mod keygen {
     }
 
     impl KeygenAggregationCircuitIntent for AggIntentMerkle {
+        type AggregationCircuit = AggregationCircuit;
         fn intent_of_dependencies(&self) -> Vec<AggregationDependencyIntent> {
             self.deps.iter().map(|d| d.into()).collect()
         }

@@ -103,6 +103,7 @@ impl AxiomAgg1Intent {
 }
 
 impl KeygenAggregationCircuitIntent for AxiomAgg1Intent {
+    type AggregationCircuit = AggregationCircuit;
     fn intent_of_dependencies(&self) -> Vec<AggregationDependencyIntent> {
         self.deps.values().map(|(_, d)| d.into()).collect()
     }

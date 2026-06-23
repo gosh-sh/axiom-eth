@@ -104,6 +104,7 @@ impl SubqueryAggIntent {
 }
 
 impl KeygenAggregationCircuitIntent for SubqueryAggIntent {
+    type AggregationCircuit = AggregationCircuit;
     fn intent_of_dependencies(&self) -> Vec<AggregationDependencyIntent> {
         self.deps.values().map(|(_, d)| d.into()).collect()
     }

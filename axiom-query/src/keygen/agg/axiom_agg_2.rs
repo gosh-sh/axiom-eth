@@ -87,6 +87,7 @@ impl AxiomAgg2Intent {
 }
 
 impl KeygenAggregationCircuitIntent for AxiomAgg2Intent {
+    type AggregationCircuit = AggregationCircuit;
     fn intent_of_dependencies(&self) -> Vec<AggregationDependencyIntent> {
         vec![(&self.axiom_agg1_intent).into()]
     }
